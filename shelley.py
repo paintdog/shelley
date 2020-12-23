@@ -23,7 +23,7 @@ def download(url):
 
 def get_horoscope(sign, mode="daily"):
     soup = source2soup(download(get_url(sign.lower())))
-    content = soup.find("div", attrs={"class": "small-12 columns"}).text
+    content = soup.find("div", attrs={"class": "views-row"}).text
 
     if "Sorry the page cannot be found" in content:
         raise Error("Horoscope couldn't be found. Sorry!")
@@ -35,16 +35,16 @@ def get_horoscope(sign, mode="daily"):
         weekly = content.split("Weekly")[1].split("Monthly")[0]
         return prettify(weekly)
     elif mode == "monthly":
-        monthly = content.split("Monthly")[1].split("Year to come")[0]
+        monthly = content.split("Monthly")[1].split("Year to Come")[0]
         return prettify(monthly)
     elif mode == "yearly":
-        yearly = content.split("Year to come")[1]
+        yearly = content.split("Year to Come")[1].split("Do You Want to Learn More?")[0]
         return prettify(yearly)
     else:
         raise Error("This mode is not supported.")
 
 def get_url(sign):
-    url = "https://www.shelleyvonstrunckel.com/astrology/starsigns/item/{}"
+    url = "https://www.shelleyvonstrunckel.com/site/starsigns?alias={}"
     return url.format(sign)
 
 def prettify(text):
@@ -59,19 +59,19 @@ def source2soup(source):
     return BeautifulSoup(source, "html5lib")
 
 def main():
-    signs = ["capricorn", "aquarius", "pisces", "aries",
-             "taurus", "gemini", "cancer", "leo", "virgo",
-             "libra", "scorpio", "sagittarius"]
+    signs = ["Capricorn", "Aquarius", "Pisces", "Aries",
+             "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+             "Libra", "Scorpio", "Sagittarius"]
 
-    sign = "aries"
+    sign = "Aries"
 
-    print(get_horoscope(sign, "daily"), end="\n\n")
+    print([get_horoscope(sign, "daily")], end="\n\n")
 
-    print(get_horoscope(sign, "weekly"), end="\n\n")
+    print([get_horoscope(sign, "weekly")], end="\n\n")
 
-    print(get_horoscope(sign, "monthly"), end="\n\n")
+    print([get_horoscope(sign, "monthly")], end="\n\n")
     
-    print(get_horoscope(sign, "yearly"), end="\n\n")
+    print([get_horoscope(sign, "yearly")], end="\n\n")
 
 
 if __name__ == "__main__":
