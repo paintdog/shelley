@@ -8,13 +8,13 @@ Es gibt 4 Modi ("*daily*", "*weekly*", "*monthly*", "*yearly*") und 12 Sternzeic
 Standardmäßig wird das Tageshoroskop geliefert (Modus: "*daily*"):
 
     >>> from shelley import get_horoscope
-    >>> get_horoscope("aries")
+    >>> get_horoscope("Aries")
     'The [...] changes.'
 
 Ein anderer Modus kann als Parameter übergeben werden:
 
     >>> from shelley import get_horoscope
-    >>> get_horoscope("aries", "monthly")
+    >>> get_horoscope("Aries", "monthly")
     'Usually [...] developments.'
 
 Es handelt sich um eine Fingerübung. Die Urheberrechte an den Texten auf der Website sind zu beachten.
